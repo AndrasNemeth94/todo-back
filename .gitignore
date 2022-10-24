@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+google-cloud-key.json
+openapi.yaml
+swagger.ts
+todo_newPK.json
+package-lock.json

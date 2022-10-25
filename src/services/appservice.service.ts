@@ -49,18 +49,13 @@ export class AppService {
             this.setApp(await initializeApp({
                 credential: cert(credentials as ServiceAccount),
                 storageBucket: process.env.CLOUD_PROJECT_ID },
-                envStyle === EnvStyle.dev? process.env._APP_NAME: process.env.PROD_APP_NAME
+                'todo-back'
             ));
 
             this.setDb(await getFirestore(this.app));
 
-            this.fireCloudStorage = new Storage({ keyFilename: 'google-cloud-key.json', projectId: process.env.SA_PROJECT_ID });
+            this.fireCloudStorage = new Storage({ keyFilename: 'google-cloud-key-gen.json', projectId: process.env.SA_PROJECT_ID });
             console.log('AppService FIRE CLOUD STORAGE INIT: ', this.fireCloudStorage);
-            // console.log('AppService BUCKET INIT: ', this.bucket);
-            // const testFiles = await this.bucket.getFiles();
-            // console.log('AppService TESTFILES: ', testFiles);
-
-            // console.log('AppService STORAGE BUCKET: ', bucket);
 
             const serviceInitRes: boolean | CustomError = await this.initServices();
             return serviceInitRes;

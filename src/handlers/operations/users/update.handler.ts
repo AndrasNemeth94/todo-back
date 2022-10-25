@@ -7,7 +7,6 @@ import { IUpdateUser } from '../../../models/interfaces/IUpdateUser';
 //servcies
 import { UsersService } from '../../../services/users.service';
 import { FileService } from '../../../services/file.service';
-import { checkObjProperties, ObjType } from '../../../utils/type-guard';
 
 export const userUpdateHandler = (usersService: UsersService, fileService: FileService) => async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -15,6 +14,7 @@ export const userUpdateHandler = (usersService: UsersService, fileService: FileS
         console.log('userUpdateHandler() protoUser: ', protoUser);
 
         if(req.file) {
+            console.log('FILE IS PRESENT');
             let file = req.file;
             console.log('UsersRouter::update() file: ', file);
 

@@ -40,9 +40,9 @@ if(arg === EnvStyle.dev) {
 }
 if(arg === EnvStyle.prod) {
     environment = EnvStyle.prod;
-    // port = parseInt(process.env.PROD_PORT);
+    port = parseInt(process.env.PROD_PORT);
     // console.log('PORT: ', port);
-    host = process.env.PROD_HOST;
+    // host = process.env.PROD_HOST;
     appName = process.env.PROD_APP_NAME;
 }
 console.log('EnvType before server init arg: ', arg, ', environment: ', environment, `, host:${host}` + ', appName: ' + appName);
@@ -52,10 +52,10 @@ console.log('EnvType before server init arg: ', arg, ', environment: ', environm
 // const socketIOServer = new SocketIOServer(server, { cors: { origin: host } });
 
 //json encoded bodies in requests
-const corsOptions: cors.CorsOptions = {
-    origin: [host],
-}
-app.use(cors(corsOptions))
+// const corsOptions: cors.CorsOptions = {
+//     origin: [host],
+// }
+// app.use(cors(corsOptions));
 app.use(express.json());
 
 //init sevices

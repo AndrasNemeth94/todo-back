@@ -9,7 +9,7 @@
     "clean-dist": "rm -rf dist",
     "build-dev": "npm run clean-dist && npx tsc --project .",
     "build": "npx tsc --project .",
-    "start": "node writecred.js && node dist/src/server.js dev",
+    "start": "node writecred.js && node dist/src/server.js prod",
     "start-dev": "ts-node-dev --respawn --transpile-only src/server.ts dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -17,23 +17,20 @@ import { AppService } from './services/appservice.service';
 import { authRouter } from './api/auth.router';
 import { userRoutes } from './api/users.router';
 import { messagesRouter } from './api/message.router';
+import { NextFunction } from 'connect';
 
 dotenv.config();
 
 const app = express();
-
-const corsOptions: cors.CorsOptions = {
-    origin: [process.env.CLIENT_HOST, process.env.PROD_CLIENT_HOST],
-    methods: ['GET', 'POST', 'DELETE', 'PUT'],
-    allowedHeaders: ['x-client-type', 'x-client-name', 'x-client-name', 'authorization'],
-    credentials: true,
-    optionsSuccessStatus: 200
-};
-app.use('*', cors())
-console.log('CORSOPTIONS: ', corsOptions);
-
-app.use(cors(corsOptions));
 app.use(express.json());
+
+// const corsOptions: cors.CorsOptions = {
+//     origin: [process.env.CLIENT_HOST, process.env.PROD_CLIENT_HOST],
+//     methods: ['GET', 'POST', 'DELETE', 'PUT'],
+//     allowedHeaders: ['x-client-type', 'x-client-name', 'x-client-name', 'authorization'],
+//     credentials: true,
+//     optionsSuccessStatus: 200
+// };
 
 const arg = process.argv[process.argv.length - 1];
 
@@ -41,6 +38,15 @@ let environment = EnvStyle.dev;
 let port = 0;
 let host = '';
 let appName = ''
+
+//cors
+app.use((req: Request, res: Response, next: NextFunction) => {
+    res.header('Access-Control-Allow-Origin', arg === EnvStyle.dev ? process.env.CLIENT_HOST: process.env.PROD_CLIENT_HOST);
+    res.header('Access-Control-Allow-Headers',['x_client_type', 'x_client_name', 'x_client_version', 'authorization', 'content-type']);
+    res.header('Accept', 'application/json');
+    res.header('Access-Control-Allow-Methods', ['GET', 'POST', 'DELETE', 'PUT']);
+    next();
+});
 
 if(arg === EnvStyle.dev) {
     port = parseInt(process.env.PORT);

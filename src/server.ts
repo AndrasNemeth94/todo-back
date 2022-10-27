@@ -26,6 +26,7 @@ const corsOptions: cors.CorsOptions = {
     origin: [process.env.CLIENT_HOST, process.env.PROD_CLIENT_HOST],
     methods: ['GET', 'POST', 'DELETE', 'PUT']
 };
+console.log('CORSOPTIONS: ', corsOptions);
 
 app.use(cors(corsOptions));
 app.use(express.json());

@@ -23,9 +23,13 @@ dotenv.config();
 const app = express();
 
 const corsOptions: cors.CorsOptions = {
-    origin: true
-    // methods: ['GET', 'POST', 'DELETE', 'PUT']
+    origin: [process.env.CLIENT_HOST, process.env.PROD_CLIENT_HOST],
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
+    allowedHeaders: ['x-client-type', 'x-client-name', 'x-client-name', 'authorization'],
+    credentials: true,
+    optionsSuccessStatus: 200
 };
+app.use('*', cors())
 console.log('CORSOPTIONS: ', corsOptions);
 
 app.use(cors(corsOptions));

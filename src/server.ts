@@ -40,10 +40,14 @@ let host = '';
 let appName = ''
 
 //cors
+app.options('*', cors());
+// app.options('*', 'Access-Control-Allow-Origin');
+// app.options('*', 'Access-Control-Allow-Headers');
+
 app.use((req: Request, res: Response, next: NextFunction) => {
     res.header('Access-Control-Allow-Origin', arg === EnvStyle.dev ? process.env.CLIENT_HOST: process.env.PROD_CLIENT_HOST);
     res.header('Access-Control-Allow-Headers',['x_client_type', 'x_client_name', 'x_client_version', 'authorization', 'content-type']);
-    res.header('Accept', 'application/json');
+    // res.header('Accept', 'application/json;charset=utf-8');
     res.header('Access-Control-Allow-Methods', ['GET', 'POST', 'DELETE', 'PUT']);
     next();
 });

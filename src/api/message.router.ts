@@ -17,7 +17,7 @@ import { MessageService } from '../services/messages.service';
 
 function messagesRouter(app: Express, authService: AuthService, messageService: MessageService) {
 
-    app.get('/api/messages/list',
+    app.post('/api/messages/list',
     validateJSONSchema(exportSchemas.requestSchema, true),
     authService.verifyToken.bind(authService),
     listMessagesHandler(messageService))

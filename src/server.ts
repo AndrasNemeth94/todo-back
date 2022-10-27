@@ -22,13 +22,13 @@ dotenv.config();
 
 const app = express();
 
-const corsOptions: cors.CorsOptions = {
-    origin: [process.env.CLIENT_HOST, process.env.PROD_CLIENT_HOST],
-    methods: ['GET', 'POST', 'DELETE', 'PUT']
-};
-console.log('CORSOPTIONS: ', corsOptions);
+// const corsOptions: cors.CorsOptions = {
+//     origin: [process.env.CLIENT_HOST, process.env.PROD_CLIENT_HOST],
+//     methods: ['GET', 'POST', 'DELETE', 'PUT']
+// };
+// console.log('CORSOPTIONS: ', corsOptions);
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 const arg = process.argv[process.argv.length - 1];

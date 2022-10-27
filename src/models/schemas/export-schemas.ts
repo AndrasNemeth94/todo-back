@@ -10,6 +10,8 @@ import { taskFilterDetailsSchema } from './task-filter-details.schema';
 import { updateTaskSchema } from './update-task.schema';
 import { createRouteEntitySchema } from './create-route-entity.schema';
 import { updateRouteEntitySchema } from './update-route-entity.schema';
+import { messageSchema } from './message.schema';
+import { updateMessageSchema } from './update-message.schema';
 
 export const exportSchemas = {
     loginSchema,
@@ -23,5 +25,7 @@ export const exportSchemas = {
     taskFilterDetailsSchema,
     updateTaskSchema,
     createRouteEntitySchema,
-    updateRouteEntitySchema
+    updateRouteEntitySchema,
+    messageSchema,
+    updateMessageSchema
 };

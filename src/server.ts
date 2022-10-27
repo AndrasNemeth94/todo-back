@@ -19,6 +19,7 @@ import { AppService } from './services/appservice.service';
 import { authRouter } from './api/auth.router';
 import { userRoutes } from './api/users.router';
 import { UsersService } from './services/users.service';
+import { messagesRouter } from './api/message.router';
 // import { routerEntityRouter } from './routes/route-entity.router';
 // import { taskRouter } from './routes/tasks.router';
 
@@ -83,6 +84,7 @@ appService.init(environment).then((result: CustomError | boolean) => {
         try {
             authRouter(app, appService.getService('AuthService'));
             userRoutes(app, appService.getService('UsersService'), appService.getService('AuthService'), appService.getService('FileService'));
+            messagesRouter(app, appService.getService('AuthService'), appService.getService('MessageService'));
             // routerEntityRouter(app, appService.getService('RouteEntityService'), appService.getService('AuthService'));
             // taskRouter(app, appService.getService('TasksService'),appService.getService('RouteEntityService'), appService.getService('AuthService'));
             initResult = "Server initialization successful!";

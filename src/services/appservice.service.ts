@@ -15,6 +15,7 @@ import { UsersService } from './users.service';
 // import { CheckPointService } from './checkpoint.service';
 // import { TasksService } from './tasks.service';
 import { FileService } from './file.service';
+import { MessageService } from './messages.service';
 
 export class AppService {
 
@@ -123,12 +124,14 @@ export class AppService {
                 return fileUpload;
             }
             const userService = new UsersService(this.db);
+            const messageService = new MessageService(this.db);
             // const routeEntityService = new RouteEntityService(this.db);
             // const taskService = new TasksService(this.db);
 
             AppService.servicesMap.set('AuthService', authService);
             AppService.servicesMap.set('FileService', fileService);
             AppService.servicesMap.set('UsersService', userService);
+            AppService.servicesMap.set('MessageService', messageService);
             // AppService.servicesMap.set('RouteEntityService', routeEntityService);
             // AppService.servicesMap.set('TasksService', taskService);
             // (AppService.servicesMap.get('RouteEntityService') as RouteEntityService).setTaskService(taskService);

@@ -16,13 +16,11 @@ import cors from 'cors';
 function authRouter(app: Express, authService: AuthService) {
 
     app.post('/api/login',
-    cors(),
     validateJSONSchema(exportSchemas.requestSchema, true),
     validateJSONSchema(exportSchemas.loginSchema, false),
     userAuthHandler(authService)),
 
     app.post('/api/refresh',
-    cors(),
     validateJSONSchema(exportSchemas.tokensSchema, false),
     tokenRefreshHandler(authService))
 }

@@ -17,7 +17,6 @@ import { AppService } from './services/appservice.service';
 import { authRouter } from './api/auth.router';
 import { userRoutes } from './api/users.router';
 import { messagesRouter } from './api/message.router';
-import { NextFunction } from 'connect';
 
 dotenv.config();
 
@@ -26,9 +25,8 @@ const app = express();
 const arg = process.argv[process.argv.length - 1];
 
 //cors
-const allowedOrigin = arg === EnvStyle.dev ? process.env.CLIENT_HOST: process.env.PROD_CLIENT_HOST;
+// const allowedOrigin = arg === EnvStyle.dev ? process.env.CLIENT_HOST: process.env.PROD_CLIENT_HOST;
 const corsOptions: cors.CorsOptions = {
-    origin: allowedOrigin,
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", 'x_client_type', 'x_client_name', 'x_client_version', 'authorization'],
     credentials: true,

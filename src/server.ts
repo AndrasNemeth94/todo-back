@@ -22,35 +22,27 @@ import { NextFunction } from 'connect';
 dotenv.config();
 
 const app = express();
-app.use(express.json());
-
-// const corsOptions: cors.CorsOptions = {
-//     origin: [process.env.CLIENT_HOST, process.env.PROD_CLIENT_HOST],
-//     methods: ['GET', 'POST', 'DELETE', 'PUT'],
-//     allowedHeaders: ['x-client-type', 'x-client-name', 'x-client-name', 'authorization'],
-//     credentials: true,
-//     optionsSuccessStatus: 200
-// };
 
 const arg = process.argv[process.argv.length - 1];
+
+//cors
+const allowedOrigin = arg === EnvStyle.dev ? process.env.CLIENT_HOST: process.env.PROD_CLIENT_HOST;
+const corsOptions: cors.CorsOptions = {
+    origin: allowedOrigin,
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", 'x_client_type', 'x_client_name', 'x_client_version', 'authorization'],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+console.log('CORS OPTIONS on INIT: ', corsOptions);
+app.use('*', cors(corsOptions));
+
+app.use(express.json());
 
 let environment = EnvStyle.dev;
 let port = 0;
 let host = '';
 let appName = ''
-
-//cors
-app.options('*', cors());
-// app.options('*', 'Access-Control-Allow-Origin');
-// app.options('*', 'Access-Control-Allow-Headers');
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-    res.header('Access-Control-Allow-Origin', arg === EnvStyle.dev ? process.env.CLIENT_HOST: process.env.PROD_CLIENT_HOST);
-    res.header('Access-Control-Allow-Headers',['x_client_type', 'x_client_name', 'x_client_version', 'authorization', 'content-type']);
-    // res.header('Accept', 'application/json;charset=utf-8');
-    res.header('Access-Control-Allow-Methods', ['GET', 'POST', 'DELETE', 'PUT']);
-    next();
-});
 
 if(arg === EnvStyle.dev) {
     port = parseInt(process.env.PORT);
